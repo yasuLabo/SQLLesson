@@ -1,0 +1,15 @@
+
+-- 問題22
+-- orders と order_items を結合し、2021年1月～12月の各月ごとの売上額（月次売上：quantity × unit_price の合計）を取得せよ。結果は month（YYYY-MM 形式）順で出力。
+
+
+
+
+SELECT 
+    TO_CHAR(O.ORDER_DATE,'YYYY-MM') AS MONTH,
+    SUM(I.QUANTITY*I.UNIT_PRICE) AS MONTHLY_SALES
+FROM ORDERS O
+ INNER JOIN ORDER_ITEMS I
+    ON O.ORDER_ID=I.ORDER_ID
+WHERE O.ORDER_DATE BETWEEN DATE '2021-01-01' AND DATE '2021-12-31'
+ GROUP BY TO_CHAR(O.ORDER_DATE,'YYYY-MM');
